@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import nl.inl.blacklab.index.DocIndexerFactoryPlugin;
 import nl.inl.blacklab.index.DownloadCache;
 import nl.inl.blacklab.index.ZipHandleManager;
 import nl.inl.blacklab.index.config.YamlJsonReader;
@@ -62,7 +63,6 @@ public class ConfigReader extends YamlJsonReader {
      * @throws IOException
      */
     public static void setConfigFile(File file) throws FileNotFoundException, IOException {
-
     	if (file == null || !file.canRead())
     		throw new FileNotFoundException("Configuration file " + file + " is unreadable.");
 
@@ -149,6 +149,7 @@ public class ConfigReader extends YamlJsonReader {
             Entry<String, JsonNode> e = it.next();
             switch (e.getKey()) {
             case "search": readSearch(obj(e), searcher); break;
+            case "plugins":
             case "indexing":
             case "debug":
             	break;
@@ -210,6 +211,7 @@ public class ConfigReader extends YamlJsonReader {
             Entry<String, JsonNode> e = it.next();
             switch (e.getKey()) {
             case "indexing": readIndexing(obj(e)); break;
+            case "plugins": DocIndexerFactoryPlugin.initPlugins(obj(e)); break;
             case "debug": readDebug(obj(e)); break;
             case "search":
             	break;

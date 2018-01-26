@@ -103,7 +103,7 @@ public class DocumentFormats {
 	}
 
     /**
-     * Returns a list of all registered document format abbreviations for all factories,
+     * Returns a list of all registered document formats for all factories,
      * sorted by descending priority.
      * Note that this list might contain duplicates if multiple factories support the same formatIdentifier,
      * such as when registering extra instances of the builtin factories.
@@ -120,8 +120,8 @@ public class DocumentFormats {
     }
 
 	/**
-	 * Returns an alphabetically sorted list of registered document format abbreviations.
-	 * Note that this list will not contain duplicates, though internally ids may be duplicated (though only the most recent once is used)
+	 * Returns an alphabetically sorted list of registered document formats.
+	 * Note that though this list will not contain duplicates, duplicates might exist internally (see {@link DocumentFormats#getSupportedFormats()}).
 	 *
 	 * @return the list of registered formatIdentifiers
 	 * @deprecated use getFormats()
